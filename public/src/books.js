@@ -1,38 +1,20 @@
 function findAuthorById(authors, id) {
-  let author = null
-  for (let i = 0; i < authors.length; i++) {
-    if (authors[i].id === id) {
-      author = authors[i];
-    }
-  }
-  return author
+  return authors.find((author) => author.id === id)
 }
 
 function findBookById(books, id) {
-    let correctBook = null
-    for (let i = 0; i < books.length; i++) {
-      let book = books[i]
-      if (book.id === id) {
-        correctBook = book;
-      }
-    }
-    return correctBook
+    return books.find((book) => book.id === id)
 }
 
 function partitionBooksByBorrowedStatus(books) {
-  let result = []
-  let checkedOut = []
-  let returned = []
-  for (let i = 0; i < books.length; i++) {
-    if(books[i].borrows[0].returned === false) {
-      checkedOut.push(books[i])
-    } else {returned.push(books[i])
-    }
-  }
-  result.push(checkedOut)
-  result.push(returned)
-  return result
+  const returnedBooks = books.filter((book) =>
+    book.borrows.every((borrow) => borrow.returned === true))
+  const borrowedBooks = books.filter((book) =>
+    book.borrows.some((borrow) => borrow.returned === false))
+  const partitionedBooks = [[...borrowedBooks], [...returnedBooks]]
+  return partitionedBooks;
 }
+
 
 function getBorrowersForBook(book, accounts) {
   let result = []
