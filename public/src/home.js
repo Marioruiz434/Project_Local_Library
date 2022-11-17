@@ -2,8 +2,12 @@ function getTotalBooksCount(books) {
   return books.length
 }
 
+//helper function
+function helperFunction(parameter) {return parameter.length}
+//helper function
+
 function getTotalAccountsCount(accounts) {
-  return accounts.length
+  return helperFunction(accounts)
 }
 
 function getBooksBorrowedCount(books) {
@@ -20,6 +24,8 @@ function getMostCommonGenres(books) {
   } , [])
   return bookGenres.sort((genreA, genreB) => (genreB.count - genreA.count)).slice(0,5);
   }
+
+//helper function
 
   function getMostPopularBooks(books) {
     return books.map((book) => {
